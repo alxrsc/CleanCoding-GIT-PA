@@ -60,7 +60,7 @@ GRAPH *createGraph(int num_of_vertices)
     
     return graph;
 }
-
+// unused functions
 STACK *createStack(int capacity)
 {
     STACK *stack = malloc(sizeof(STACK));
@@ -77,20 +77,17 @@ void push(int data, STACK *stack)
     stack->arr[stack->top] = data;
 }
 
-void DFS(GRAPH *graph, STACK *stack, int v_nr)
+void DFS(GRAPH *graph, int v_nr)
 {
     NODE *current = graph->head[v_nr];
-//    NODE *aux = adj_list;
     graph->visited[v_nr] = 1;
-//    printf("%d ", v_nr);
-//    push(v_nr, stack);
 
     while (current != NULL)
     {
         int con_ver = current->data;
 
         if ( graph->visited[con_ver] == 0 )
-            DFS(graph, stack, con_ver);
+            DFS(graph, con_ver);
          current = current->next;
     }
 }
@@ -116,17 +113,17 @@ void wipeVisited(GRAPH *graph, int num_of_vertices)
 }
 
 int canBe(GRAPH *graph, int num_of_vertices, int src, int dest) {
-    STACK *stack = createStack(2 * num_of_vertices);
+
     int can_be = 0;
-    
-    DFS(graph, stack, src); // Căutăm un drum de la src la dest
+
+    wipeVisited(graph, num_of_vertices);
+
+    // Căutăm un drum de la src la dest
+    DFS(graph, src);
 
     // Dacă dest a fost vizitat în timpul căutării DFS de la src, atunci există un drum între src și dest
     if (graph->visited[dest] == 1)
         can_be = 1;
-
-    free(stack->arr);
-    free(stack);
 
     return can_be;
 }
