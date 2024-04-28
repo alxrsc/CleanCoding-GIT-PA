@@ -137,10 +137,10 @@ int main()
     int edg_nr;
     int src, dest;
     
-    printf("cate noduri are graful?");
+    printf("cate noduri are graful? ");
     scanf("%d", &num_of_vertices);
     
-    printf("cate muchii are graful?");
+    printf("cate muchii are graful? ");
     scanf("%d", &edg_nr);
     
     GRAPH *graph = createGraph(num_of_vertices);
@@ -154,8 +154,6 @@ int main()
         printf("exista drum!");
     else
         printf("nu exista drum!");
-
-
 
     return 0;
 }
